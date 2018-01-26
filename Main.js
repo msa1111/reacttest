@@ -26,6 +26,7 @@ const MainNavigator = TabNavigator({
 
     },
     {
+        swipeEnabled:false,
         tabBarPosition:'bottom',
         tabBarOptions:{
             iconStyle:{
