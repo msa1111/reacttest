@@ -10,7 +10,7 @@ export default  class NetUtils extends React.Component {
          * */
     static get(url, params, callback) {
         //打印参数
-        console.log(url);
+
         console.log(params);
 
 
@@ -23,15 +23,19 @@ export default  class NetUtils extends React.Component {
             } else {
                 url += '&' + paramsArray.join('&')
             }
+            console.log(paramsArray);
+            console.log(url);
         }
         //fetch请求
         fetch(url, {
             method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
         })
-            .then((response) => {
-                console.log(responseJSON)
-                callback(response)
-            }).done();
+            .then((responseJSON) => responseJSON)
+            .then((responseJSON) =>callback(responseJSON))
+            .done();
     }
 
     /*
@@ -63,7 +67,6 @@ export default  class NetUtils extends React.Component {
     /*
      *  post请求
      *  url:请求地址
-     *  data:参数
      *  callback:回调函数
      * */
     static postJson(url, params, callback) {
@@ -85,8 +88,6 @@ export default  class NetUtils extends React.Component {
                 callback(responseJSON)
             }).done();
     }
-
-
 }
 
 module.exports = NetUtils;

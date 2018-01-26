@@ -14,6 +14,11 @@ export default class UrlUtils {
      */
     static loginUrl = '/galaxy-sso-business/login';
 
+    /**
+     * 获取公司帐套.
+     */
+    static findCompanyUrl = "/galaxy-base-business/api/company/findCompany";
+
 }
 
 
