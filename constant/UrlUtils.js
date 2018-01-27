@@ -19,6 +19,11 @@ export default class UrlUtils {
      */
     static findCompanyUrl = "/galaxy-base-business/api/company/findCompany";
 
+    /**
+     * 获取公司帐套.
+     */
+    static biUrl = "/galaxy-mobile-bi-www/index";
+
 }
 
 

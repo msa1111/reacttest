@@ -1,11 +1,10 @@
 import React,{Component} from "react";
 
 import {
-    Text,
-    View,
     Image,
-    Dimensions, AppRegistry
+    WebView,
 } from 'react-native';
+import UrlUtils from "./constant/UrlUtils";
 
 export default class ManagePart extends Component<{}> {
 
@@ -21,9 +20,9 @@ export default class ManagePart extends Component<{}> {
 
     render() {
         return(
-            <View>
-                <Text>管理页面</Text>
-            </View>
+           <WebView
+                source={{uri: UrlUtils.domain+UrlUtils.biUrl}}
+           />
         )
     }
 }
