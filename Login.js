@@ -22,6 +22,7 @@ import {
 } from 'react-navigation';
 import Main from "./Main";
 import ModalDropdown from 'react-native-modal-dropdown';
+import ScreenUtils from "./utils/ScreenUtils";
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -48,7 +49,7 @@ export default class Login extends Component<{}> {
             ,comIndex:null};
 
     };
-
+    //预加载
     componentDidMount()
     {
         this.getCompCode()
@@ -85,10 +86,12 @@ export default class Login extends Component<{}> {
                 <ModalDropdown
                     defaultValue={'公司编码'}
                     style={{height:40}}
-                    textStyle={{marginTop:10}}
+                    textStyle={{
+                        marginLeft:5,
+                        marginTop:10}}
                     dropdownStyle={{
                         marginTop:30,
-                        flex: 1, width: 350
+                        flex: 1, width: ScreenUtils.screenWidth-40
                     }}
                     options={this.state.comArr}
                     onSelect={(index) => {
@@ -105,6 +108,7 @@ export default class Login extends Component<{}> {
             <View style={styles.borderStyle}>
                 <TextInput
                     id="input_user_account"
+                    underlineColorAndroid="transparent"
                     style={styles.inputStyle} placeholder='登陆人'
                     onChangeText={(text) => {
                         this.userAccount = text
@@ -115,6 +119,7 @@ export default class Login extends Component<{}> {
             <View style={styles.borderStyle}>
                 <TextInput
                     id="input_pass_word"
+                    underlineColorAndroid="transparent"
                     style={styles.inputStyle} placeholder='密码'
                     onChangeText={(text) => {
                         this.passWord = text
@@ -232,7 +237,8 @@ const styles = StyleSheet.create({
     inputStyle: {
         textAlign: 'left',
         color: '#333333',
-        height:40
+        height:40,
+        // underlineColorAndroid:'rgba(0,0,0,0)'
 
     },
 
