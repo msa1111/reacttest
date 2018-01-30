@@ -1,7 +1,7 @@
 import { AppRegistry } from 'react-native';
 import {StackNavigator} from "react-navigation";
-import Main from "./Main";
-import Login from './Login';
+import Main from "./androidpage/mainpage/Main";
+import Login from './androidpage/Loginpage/Login';
 
 
 const MyProject = StackNavigator({

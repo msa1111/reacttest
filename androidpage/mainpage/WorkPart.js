@@ -8,13 +8,13 @@ import {
     ScrollView,
     FlatList
 } from 'react-native';
-import ScreenUtils from "./utils/ScreenUtils";
+import ScreenUtils from "../../utils/ScreenUtils";
 
 // const screenWidth = Dimensions.get("window").width;
 const BANNER_IMGS = [
-    require('./mipmap-xxhdpi/banner1.png'),
-    require('./mipmap-xxhdpi/banner2.png'),
-    require('./mipmap-xxhdpi/banner3.png'),
+    require('../../mipmap-xxhdpi/banner1.png'),
+    require('../../mipmap-xxhdpi/banner2.png'),
+    require('../../mipmap-xxhdpi/banner3.png'),
 ];
 
 export default class WorkPart extends Component<{}> {
@@ -24,7 +24,7 @@ export default class WorkPart extends Component<{}> {
 
         tabBarIcon: ({tintColor}) => (
             <Image
-                source={require('./mipmap-xxhdpi/ic_work_select.png')}
+                source={require('../../mipmap-xxhdpi/ic_work_select.png')}
                 style={{width: 20, height: 20}}
             />
         ),
@@ -60,7 +60,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 1,
                 itemName: '开单',
-                imgSource: require('./mipmap-xxhdpi/ic_kaidan.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_kaidan.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -74,7 +74,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 2,
                 itemName: '查询补打',
-                imgSource: require('./mipmap-xxhdpi/ic_chaxunbuda.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_chaxunbuda.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -87,7 +87,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 3,
                 itemName: '订单受理',
-                imgSource: require('./mipmap-xxhdpi/ic_dingdanjiedan.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_dingdanjiedan.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -100,7 +100,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 4,
                 itemName: '揽货接单',
-                imgSource: require('./mipmap-xxhdpi/ic_dingdanjiedan.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_dingdanjiedan.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -113,7 +113,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 5,
                 itemName: '派件签收',
-                imgSource: require('./mipmap-xxhdpi/ic_paisongqianshou.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_paisongqianshou.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -126,7 +126,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 6,
                 itemName: '统计',
-                imgSource: require('./mipmap-xxhdpi/ic_tongji.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_tongji.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -139,7 +139,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 7,
                 itemName: '问题件上传',
-                imgSource: require('./mipmap-xxhdpi/ic_problem.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_problem.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -152,7 +152,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 8,
                 itemName: '无头件上传',
-                imgSource: require('./mipmap-xxhdpi/ic_notitle.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_notitle.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -166,7 +166,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 9,
                 itemName: '装车任务',
-                imgSource: require('./mipmap-xxhdpi/ic_load_task.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_load_task.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -179,7 +179,7 @@ export default class WorkPart extends Component<{}> {
             {
                 key: 10,
                 itemName: '卸车任务',
-                imgSource: require('./mipmap-xxhdpi/ic_unload_task.png'),
+                imgSource: require('../../mipmap-xxhdpi/ic_unload_task.png'),
                 style: {
                     marginTop: 5,
                     marginBottom: 5,

@@ -11,7 +11,7 @@ export default class MessagePart extends Component<{}> {
         tabBarLabel: '消息',
         tabBarIcon: ({ tintColor }) => (
             <Image
-                source={require('./mipmap-xxhdpi/ic_message_select.png')}
+                source={require('../../mipmap-xxhdpi/ic_message_select.png')}
                 style={{width:20,height:20}}
             />
         ),

@@ -15,12 +15,12 @@ import {
     Button,
     Alert
 } from 'react-native';
-import UrlUtils from "./constant/UrlUtils";
-import NetUtils from "./utils/NetUtils"
+import UrlUtils from "../../constant/UrlUtils";
+import NetUtils from "../../utils/NetUtils"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import Main from "./Main";
+import Main from "../mainpage/Main";
 import ModalDropdown from 'react-native-modal-dropdown';
-import ScreenUtils from "./utils/ScreenUtils";
+import ScreenUtils from "../../utils/ScreenUtils";
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -75,7 +75,7 @@ export default class Login extends Component<{}> {
                         width: 300,
                         height: 100
                     }}
-                    source={require('./mipmap-xxhdpi/ic_login_logo.png')}/>
+                    source={require('../../mipmap-xxhdpi/ic_login_logo.png')}/>
             </View>
 
 

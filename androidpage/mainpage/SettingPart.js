@@ -12,7 +12,7 @@ export default class SettingPart extends Component<{}> {
         tabBarLabel: '设置',
         tabBarIcon: ({ tintColor }) => (
             <Image
-                source={require('./mipmap-xxhdpi/ic_setting_select.png')}
+                source={require('../../mipmap-xxhdpi/ic_setting_select.png')}
                 style={{ width:20,height:20}}
             />
         ),
