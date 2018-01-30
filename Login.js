@@ -17,9 +17,7 @@ import {
 } from 'react-native';
 import UrlUtils from "./constant/UrlUtils";
 import NetUtils from "./utils/NetUtils"
-import {
-    StackNavigator,
-} from 'react-navigation';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Main from "./Main";
 import ModalDropdown from 'react-native-modal-dropdown';
 import ScreenUtils from "./utils/ScreenUtils";
@@ -105,6 +103,7 @@ export default class Login extends Component<{}> {
 
 
             {/*登录人*/}
+            <KeyboardAwareScrollView>
             <View style={styles.borderStyle}>
                 <TextInput
                     id="input_user_account"
@@ -114,8 +113,11 @@ export default class Login extends Component<{}> {
                         this.userAccount = text
                     }}/>
             </View>
+            </KeyboardAwareScrollView>
 
             {/*密码*/}
+            <KeyboardAwareScrollView
+                enableOnAndroid={true}>
             <View style={styles.borderStyle}>
                 <TextInput
                     id="input_pass_word"
@@ -125,7 +127,7 @@ export default class Login extends Component<{}> {
                         this.passWord = text
                     }}/>
             </View>
-
+            </KeyboardAwareScrollView>
 
             {/*登录按钮*/}
             <View style={styles.buttonStyle}>
@@ -138,6 +140,7 @@ export default class Login extends Component<{}> {
                 >
                 </Button>
             </View>
+
 
 
         </View>;
@@ -161,7 +164,8 @@ export default class Login extends Component<{}> {
             // }
 
             responseText => {
-                let tempArr =  JSON.parse(responseText._bodyInit).data;
+                // let tempArr =  JSON.parse(responseText._bodyInit).data;
+                let tempArr = responseText.data;
                 let comTempArr= [];
                 console.log(tempArr);
 

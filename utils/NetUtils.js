@@ -33,7 +33,7 @@ export default  class NetUtils extends React.Component {
                 'Content-Type': 'application/json'
             },
         })
-            .then((responseJSON) => responseJSON)
+            .then((response) => response.json())
             .then((responseJSON) =>callback(responseJSON))
             .done();
     }

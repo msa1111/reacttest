@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.0.0",
     "react-native": "0.51.0",
+    "react-native-keyboard-aware-scroll-view": "^0.4.3",
     "react-native-modal-dropdown": "^0.6.0",
     "react-native-swiper": "^1.5.12",
     "react-native-viewpager": "^0.2.13",
