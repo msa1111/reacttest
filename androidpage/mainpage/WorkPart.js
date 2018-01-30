@@ -4,11 +4,10 @@ import {
     View,
     Image,
     StyleSheet,
-    Dimensions,
-    ScrollView,
     FlatList
 } from 'react-native';
 import ScreenUtils from "../../utils/ScreenUtils";
+import WorkPartBanner from "./widget/WorkPartBanner";
 
 // const screenWidth = Dimensions.get("window").width;
 const BANNER_IMGS = [
@@ -33,28 +32,8 @@ export default class WorkPart extends Component<{}> {
     constructor(props) {
         super(props);
 
-        //滚动的轮播图
-        this._scrollView;
         this.state = {
-            //轮播图位置
-            swiperIndex: 0
         };
-
-
-        //计时器
-        this.timer = setInterval(
-            () => {
-                // alert('计时器')
-                let index = (this.state.swiperIndex + 1) % BANNER_IMGS.length;
-                this.setState({
-                    swiperIndex: index
-                })
-                // console.log(this.state.swiperIndex);
-                this._scrollView.scrollTo({x: (ScreenUtils.screenWidth * this.state.swiperIndex)});
-            },
-            2000
-        );
-
 
         this.flatListData = [
             {
@@ -216,27 +195,14 @@ export default class WorkPart extends Component<{}> {
                     height: 45,
                 }
             }
-
-
         ];
-
-
     }
 
     render() {
         return (
             // var _scrollView: ScrollView;
             <View>
-                <ScrollView
-                    ref={(scrollView) => {
-                        this._scrollView = scrollView;
-                    }}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled={true}
-                >
-                    {this.createPage()}
-                </ScrollView>
+                <WorkPartBanner/>
                 <FlatList
                     data={this.flatListData}
                     horizontal={false}
@@ -245,27 +211,11 @@ export default class WorkPart extends Component<{}> {
                         this._renderItem
                     }
                 />
-
             </View>
 
         )
     }
 
-
-    //创建banner page
-    createPage() {
-        var imgArr = [];
-        for (let i = 0; i < BANNER_IMGS.length; i++) {
-            imgArr.push(
-                <View key={i} style={styles.pageView}>
-                    <Image
-                        style={styles.page}
-                        source={BANNER_IMGS[i]}/>
-                </View>)
-        }
-
-        return imgArr;
-    }
 
     //方法直接返回view，返回体不要写{}
     _renderItem = ({item}) =>
@@ -279,38 +229,10 @@ export default class WorkPart extends Component<{}> {
             <Text>{item.itemName}</Text>
         </View>;
 
-
-    componentWillUnmount() {
-        // 如果存在this.timer，则使用clearTimeout清空。
-        // 如果你使用多个timer，那么用多个变量，或者用个数组来保存引用，然后逐个clear
-        this.timer && clearInterval(this.timer);
-    }
-
 }
 
 
 const styles = StyleSheet.create({
-    swiper: {
-        width: 600,
-        height: 200
-    },
-    img: {
-        width: 600,
-        height: 200
-    },
-
-    pageView: {
-        flex: 1,
-        width: ScreenUtils.screenWidth,
-        height: 170,
-    },
-
-    page: {
-        flex: 1,
-        width: ScreenUtils.screenWidth,
-        height: 170,
-        resizeMode: 'stretch'
-    },
 
     flatItem: {
         marginTop:20,
@@ -318,13 +240,4 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    // flatImgItem : {
-    //     marginTop:5,
-    //     marginBottom:5,
-    //     justifyContent: 'center',
-    //     alignItems:'center',
-    //     width:70,
-    //     height:90,
-    //     flex:1,
-    // }
 })

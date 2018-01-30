@@ -117,6 +117,7 @@ export default class Login extends Component<{}> {
 
             {/*密码*/}
             <KeyboardAwareScrollView
+                // extraScrollHeight ={40}
                 enableOnAndroid={true}>
             <View style={styles.borderStyle}>
                 <TextInput
