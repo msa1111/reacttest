@@ -4,10 +4,12 @@ import {
     View,
     Image,
     StyleSheet,
-    FlatList
+    FlatList,
+    TouchableOpacity
 } from 'react-native';
 import ScreenUtils from "../../utils/ScreenUtils";
 import WorkPartBanner from "./widget/WorkPartBanner";
+import SettingPart from "./SettingPart";
 
 // const screenWidth = Dimensions.get("window").width;
 const BANNER_IMGS = [
@@ -219,6 +221,13 @@ export default class WorkPart extends Component<{}> {
 
     //方法直接返回view，返回体不要写{}
     _renderItem = ({item}) =>
+        <TouchableOpacity style={styles.flatItem}
+                          onPress = {() =>{
+                this.props.navigation.navigate('SettingPart');
+                console.log(this.props.navigation);
+                console.log(this.props.navigation.navigate('SettingPart'));
+            }
+           }>
         <View style={styles.flatItem}>
             <Image
                 style={
@@ -227,7 +236,8 @@ export default class WorkPart extends Component<{}> {
                 source={item.imgSource}
             />
             <Text>{item.itemName}</Text>
-        </View>;
+        </View>
+        </TouchableOpacity>;
 
 }
 
