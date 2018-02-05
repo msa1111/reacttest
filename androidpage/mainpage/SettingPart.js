@@ -6,16 +6,16 @@ import {
     Dimensions, AppRegistry
 } from 'react-native';
 
+var PropTypes = require('prop-types');
+var ViewPropTypes = require('ViewPropTypes');
+
 export default class SettingPart extends Component<{}> {
 
-    static navigationOptions = {
-        tabBarLabel: '设置',
-        tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={require('../../mipmap-xxhdpi/ic_setting_select.png')}
-                style={{ width:20,height:20}}
-            />
-        ),
+
+
+    static propTypes = {
+        ...ViewPropTypes,
+      navigation:PropTypes.object,
     };
 
     render() {

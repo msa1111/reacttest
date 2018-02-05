@@ -7,11 +7,13 @@ import {
     FlatList,
     TouchableOpacity
 } from 'react-native';
-import ScreenUtils from "../../utils/ScreenUtils";
 import WorkPartBanner from "./widget/WorkPartBanner";
-import SettingPart from "./SettingPart";
+import SearchPage from "../search/SearchPage";
+import {StackNavigator,NavigationActions} from "react-navigation";
+import {PropTypes,} from 'prop-types'
+import {ViewPropTypes,} from 'ViewPropTypes'
 
-// const screenWidth = Dimensions.get("window").width;
+
 const BANNER_IMGS = [
     require('../../mipmap-xxhdpi/banner1.png'),
     require('../../mipmap-xxhdpi/banner2.png'),
@@ -19,23 +21,18 @@ const BANNER_IMGS = [
 ];
 
 export default class WorkPart extends Component<{}> {
-    static navigationOptions = {
-        tabBarLabel: '工作',
 
 
-        tabBarIcon: ({tintColor}) => (
-            <Image
-                source={require('../../mipmap-xxhdpi/ic_work_select.png')}
-                style={{width: 20, height: 20}}
-            />
-        ),
+
+    static propTypes = {
+        ...ViewPropTypes,
+        navigation:PropTypes.object,
     };
 
     constructor(props) {
         super(props);
 
-        this.state = {
-        };
+        this.state = {};
 
         this.flatListData = [
             {
@@ -56,6 +53,7 @@ export default class WorkPart extends Component<{}> {
                 key: 2,
                 itemName: '查询补打',
                 imgSource: require('../../mipmap-xxhdpi/ic_chaxunbuda.png'),
+                destPage:'SearchPage',
                 style: {
                     marginTop: 5,
                     marginBottom: 5,
@@ -200,7 +198,11 @@ export default class WorkPart extends Component<{}> {
         ];
     }
 
+
+
     render() {
+
+
         return (
             // var _scrollView: ScrollView;
             <View>
@@ -222,21 +224,23 @@ export default class WorkPart extends Component<{}> {
     //方法直接返回view，返回体不要写{}
     _renderItem = ({item}) =>
         <TouchableOpacity style={styles.flatItem}
-                          onPress = {() =>{
-                this.props.navigation.navigate('SettingPart');
-                console.log(this.props.navigation);
-                console.log(this.props.navigation.navigate('SettingPart'));
-            }
-           }>
-        <View style={styles.flatItem}>
-            <Image
-                style={
-                    item.style
-                }
-                source={item.imgSource}
-            />
-            <Text>{item.itemName}</Text>
-        </View>
+                          onPress={() =>{
+                              console.log(this.props.navigation);
+                              this.props.navigation.navigate(item.destPage);
+
+                          }
+
+
+                          }>
+            <View style={styles.flatItem}>
+                <Image
+                    style={
+                        item.style
+                    }
+                    source={item.imgSource}
+                />
+                <Text>{item.itemName}</Text>
+            </View>
         </TouchableOpacity>;
 
 }
@@ -245,7 +249,7 @@ export default class WorkPart extends Component<{}> {
 const styles = StyleSheet.create({
 
     flatItem: {
-        marginTop:20,
+        marginTop: 20,
         flex: 1,
         alignItems: 'center'
     },
