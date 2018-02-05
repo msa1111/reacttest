@@ -20,8 +20,6 @@ export class WorkPartTab extends Component<{}> {
 
     static navigationOptions = {
         tabBarLabel: '工作',
-
-
         tabBarIcon: ({tintColor}) => (
             <Image
                 source={require('../../mipmap-xxhdpi/ic_work_select.png')}

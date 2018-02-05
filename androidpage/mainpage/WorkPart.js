@@ -202,9 +202,7 @@ export default class WorkPart extends Component<{}> {
 
     render() {
 
-
         return (
-            // var _scrollView: ScrollView;
             <View>
                 <WorkPartBanner/>
                 <FlatList
