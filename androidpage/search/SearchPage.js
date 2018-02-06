@@ -8,14 +8,17 @@ import {
     TextInput,
     AppRegistry,
     Button,
-    Alert
+    Alert,
+    FlatList
 } from 'react-native';
 import {SearchView} from "./widgte/SearchView";
 
 export default class SearchPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            flatListData : null,
+        }
     }
 
     render() {
@@ -24,9 +27,20 @@ export default class SearchPage extends Component {
                <SearchView
                    scan = {this.scan}
                    search = {this.search}/>
+                <FlatList
+                    data={this.flatListData}
+                    renderItem={
+                        this._renderItem
+                    }
+                />
             </View>
         )
     }
+
+
+    _renderItem = (item) =>{
+
+    };
 
     search = (text) => {Alert.alert("搜索了" + text)}
     scan = (text) => {Alert.alert("扫描了" + text)}
