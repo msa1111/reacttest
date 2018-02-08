@@ -23,6 +23,10 @@ export default class UrlUtils {
      * 获取公司帐套.
      */
     static biUrl = "/galaxy-mobile-bi-www/index";
+    /**
+     * 查询登录网点员工运单.
+     */
+    static  GET_USER_WAY_BILL_NUM = "/galaxy-waybill-business/api/waybill/queryWaybillByNo4App";
 
 }
 

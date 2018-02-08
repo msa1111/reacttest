@@ -19,4 +19,4 @@ const MyProject = StackNavigator({
     //隐藏标题
     headerMode:'none'});
 
-// AppRegistry.registerComponent('MyProject', () => MyProject);
+AppRegistry.registerComponent('MyProject', () => MyProject);

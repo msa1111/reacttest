@@ -21,6 +21,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Main from "../mainpage/Main";
 import ModalDropdown from 'react-native-modal-dropdown';
 import ScreenUtils from "../../utils/ScreenUtils";
+import UserInfo from "../../constant/UserInfo";
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -201,6 +202,11 @@ export default class Login extends Component<{}> {
 
             responseText => {
                 if(responseText.success){
+                    UserInfo.compCode = responseText.data.compCode;
+                    UserInfo.compName =responseText.data.compName;
+                    UserInfo.userCode = responseText.data.userCode;
+                    UserInfo.deptCode = responseText.data.deptCode;
+
                     this.props.navigation.navigate('Main');
                 } else {
                     alert("登录失败")
