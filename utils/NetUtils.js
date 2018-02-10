@@ -34,7 +34,10 @@ export default  class NetUtils extends React.Component {
             },
         })
             .then((response) => response.json())
-            .then((responseJSON) =>callback(responseJSON))
+            .then((responseJSON) =>{
+                console.log(responseJSON);
+                callback(responseJSON);
+            })
             .done();
     }
 
