@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from 'react';
+import PopupDialog ,{DialogTitle} from 'react-native-popup-dialog';
 import {
     Platform,
     StyleSheet,
@@ -13,7 +14,11 @@ import {
     TextInput,
     Image,
     Button,
-    Alert
+    Alert,
+    FlatList,
+    TouchableOpacity,
+    TouchableHighlight,
+    ToastAndroid
 } from 'react-native';
 import UrlUtils from "../../constant/UrlUtils";
 import NetUtils from "../../utils/NetUtils"
@@ -42,10 +47,14 @@ export default class Login extends Component<{}> {
         this.comCode = "";
         this.userAccount = "";
         this.passWord = "";
-
         this.state = {
-            comObj: [],comArr:[]
-            ,comIndex:null};
+            compName:"公司编码",
+            compCode : "",
+            userAccount :"",
+            passWord : "",
+            comObj: [],
+            comArr:[],
+            comIndex:null};
 
     };
     //预加载
@@ -82,25 +91,34 @@ export default class Login extends Component<{}> {
 
             {/*公司编码*/}
             <View style={styles.borderStyle}>
-                <ModalDropdown
-                    defaultValue={'公司编码'}
-                    style={{height:40}}
-                    textStyle={{
-                        marginLeft:5,
-                        marginTop:10}}
-                    dropdownStyle={{
-                        marginTop:30,
-                        flex: 1, width: ScreenUtils.screenWidth-40
-                    }}
-                    options={this.state.comArr}
-                    onSelect={(index) => {
-                        this.setState({comIndex:index});
-                        // console.log(this.state.comIndex)
-                        }
-                    }
-
-                />
+                <Text
+                    onPress ={this._sellectComp}
+                    style={styles.inputStyle}>
+                    {this.state.compName}
+                </Text>
             </View>
+
+
+            {/*<View style={styles.borderStyle}>*/}
+                {/*<ModalDropdown*/}
+                    {/*defaultValue={'公司编码'}*/}
+                    {/*style={{height:40}}*/}
+                    {/*textStyle={{*/}
+                        {/*marginLeft:5,*/}
+                        {/*marginTop:10}}*/}
+                    {/*dropdownStyle={{*/}
+                        {/*marginTop:30,*/}
+                        {/*flex: 1, width: ScreenUtils.screenWidth-40*/}
+                    {/*}}*/}
+                    {/*options={this.state.comArr}*/}
+                    {/*onSelect={(index) => {*/}
+                        {/*this.setState({comIndex:index});*/}
+                        {/*// console.log(this.state.comIndex)*/}
+                        {/*}*/}
+                    {/*}*/}
+
+                {/*/>*/}
+            {/*</View>*/}
 
 
             {/*登录人*/}
@@ -138,32 +156,56 @@ export default class Login extends Component<{}> {
                     color='#fabe00'
                     onPress={() =>
                         this.login()
+
                     }
                 >
                 </Button>
             </View>
 
-
+            <PopupDialog
+                dialogTitle={<DialogTitle title="Dialog Title" />}
+                ref={(popupDialog) => {this.popupDialog = popupDialog }}>
+                <View>
+                    <FlatList
+                        onRefresh={this.refresh}
+                        refreshing={this.state.refresh}
+                        data={this.state.comObj}
+                        // onPressItem = {this._itemSelect}
+                        renderItem={
+                            this._renderItem
+                        }
+                    />
+                </View>
+            </PopupDialog>
 
         </View>;
     }
+
+    _sellectComp = () => {
+        this.popupDialog.show();
+    };
+
+    _renderItem = ({item,index}) =>
+        <View>
+            <Text
+                key={index}
+                onPress ={this._itemSelect.bind(this,item,index)}>{item.shortName}</Text>
+        </View>;
+
+    _itemSelect(item ,index){
+        ToastAndroid.show(item.shortName,ToastAndroid.SHORT);
+        this.setState ({
+            compCode:item.compCode,
+            compName:item.shortName
+        })
+    };
+
+
 
     getCompCode() {
         this.setState({comObj : [],comArr : []});
 
         NetUtils.get(UrlUtils.domain + UrlUtils.findCompanyUrl,{compCode:'yimidida'},
-
-            //普通函数不生效
-            // function (responseText) {
-            // let tempArr =  JSON.parse(responseText._bodyInit).data;
-            // let comTempArr= [];
-            // console.log(tempArr);
-            //
-            // for (var index in tempArr ) {
-            //     comTempArr.push(tempArr[index].shortName);
-            // }
-            // this.setState ({comObj : tempArr,comArr : comTempArr});
-            // }
 
             responseText => {
                 // let tempArr =  JSON.parse(responseText._bodyInit).data;
@@ -172,6 +214,7 @@ export default class Login extends Component<{}> {
                 console.log(tempArr);
 
                 for (var index in tempArr ) {
+                    tempArr[index].key = index;
                     comTempArr.push(tempArr[index].shortName);
                 }
                     this.setState ({comObj : tempArr,comArr : comTempArr});
