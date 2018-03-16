@@ -9,7 +9,8 @@ import {
     AppRegistry,
     Button,
     Alert,
-    FlatList
+    FlatList,
+    ToastAndroid
 } from 'react-native';
 import {SearchView} from "./widgte/SearchView";
 import NetUtils from "../../utils/NetUtils";
@@ -139,10 +140,12 @@ export default class SearchPage extends Component {
 
 
     search = (text) => {
-        Alert.alert("搜索了" + text)
+        // Alert.alert("搜索了" + text)
+        ToastAndroid.show("搜索了" + text,ToastAndroid.SHORT)
     }
     scan = (text) => {
-        Alert.alert("扫描了" + text)
+        // Alert.alert("扫描了" + text)
+        ToastAndroid.show("扫描了" + text,ToastAndroid.SHORT)
     }
 }
 
