@@ -44,7 +44,6 @@ export default class Login extends Component<{}> {
 
     constructor(props) {
         super(props);
-        this.comCode = "";
         this.userAccount = "";
         this.passWord = "";
         this.state = {
@@ -99,27 +98,6 @@ export default class Login extends Component<{}> {
             </View>
 
 
-            {/*<View style={styles.borderStyle}>*/}
-                {/*<ModalDropdown*/}
-                    {/*defaultValue={'公司编码'}*/}
-                    {/*style={{height:40}}*/}
-                    {/*textStyle={{*/}
-                        {/*marginLeft:5,*/}
-                        {/*marginTop:10}}*/}
-                    {/*dropdownStyle={{*/}
-                        {/*marginTop:30,*/}
-                        {/*flex: 1, width: ScreenUtils.screenWidth-40*/}
-                    {/*}}*/}
-                    {/*options={this.state.comArr}*/}
-                    {/*onSelect={(index) => {*/}
-                        {/*this.setState({comIndex:index});*/}
-                        {/*// console.log(this.state.comIndex)*/}
-                        {/*}*/}
-                    {/*}*/}
-
-                {/*/>*/}
-            {/*</View>*/}
-
 
             {/*登录人*/}
             <KeyboardAwareScrollView>
@@ -129,7 +107,9 @@ export default class Login extends Component<{}> {
                     underlineColorAndroid="transparent"
                     style={styles.inputStyle} placeholder='登陆人'
                     onChangeText={(text) => {
-                        this.userAccount = text
+                        this.setState ({
+                            userAccount :text
+                        });
                     }}/>
             </View>
             </KeyboardAwareScrollView>
@@ -144,7 +124,9 @@ export default class Login extends Component<{}> {
                     underlineColorAndroid="transparent"
                     style={styles.inputStyle} placeholder='密码'
                     onChangeText={(text) => {
-                        this.passWord = text
+                        this.setState({
+                           passWord :text
+                        });
                     }}/>
             </View>
             </KeyboardAwareScrollView>
@@ -163,7 +145,7 @@ export default class Login extends Component<{}> {
             </View>
 
             <PopupDialog
-                dialogTitle={<DialogTitle title="Dialog Title" />}
+                dialogTitle={<DialogTitle title="选择公司" />}
                 ref={(popupDialog) => {this.popupDialog = popupDialog }}>
                 <View>
                     <FlatList
@@ -185,18 +167,20 @@ export default class Login extends Component<{}> {
         this.popupDialog.show();
     };
 
-    _renderItem = ({item,index}) =>
+    _renderItem = ({item}) =>
         <View>
             <Text
-                key={index}
-                onPress ={this._itemSelect.bind(this,item,index)}>{item.shortName}</Text>
+                //不用bind无法正常调用
+                onPress ={this._itemSelect.bind(this,item)}>{item.shortName}</Text>
         </View>;
 
-    _itemSelect(item ,index){
+    _itemSelect(item){
         ToastAndroid.show(item.shortName,ToastAndroid.SHORT);
+        this.popupDialog.dismiss();
         this.setState ({
             compCode:item.compCode,
-            compName:item.shortName
+            compName:item.shortName,
+            comIndex:item.key
         })
     };
 
@@ -230,9 +214,9 @@ export default class Login extends Component<{}> {
         console.log(this.state);
         let jsonData = {
             'appType': '2',
-            'compCode': (this.state.comObj[this.state.comIndex].compCode).toString(),
-            'workNum': this.userAccount,
-            'password': this.passWord,
+            'compCode':this.state.compCode,
+            'workNum': this.state.userAccount,
+            'password': this.state.passWord,
         };
 
         console.log(jsonData);
