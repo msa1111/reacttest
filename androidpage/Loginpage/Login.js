@@ -14,18 +14,13 @@ import {
     TextInput,
     Image,
     Button,
-    Alert,
     FlatList,
-    TouchableOpacity,
-    TouchableHighlight,
     ToastAndroid
 } from 'react-native';
 import UrlUtils from "../../constant/UrlUtils";
 import NetUtils from "../../utils/NetUtils"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Main from "../mainpage/Main";
-import ModalDropdown from 'react-native-modal-dropdown';
-import ScreenUtils from "../../utils/ScreenUtils";
 import UserInfo from "../../constant/UserInfo";
 
 const instructions = Platform.select({
@@ -66,7 +61,6 @@ export default class Login extends Component<{}> {
 
     render() {
         return <View style={styles.container}>
-            {/*{this.getCompCode()}*/}
 
             <View
                 style={styles.emptyStyle}
@@ -152,7 +146,6 @@ export default class Login extends Component<{}> {
                         onRefresh={this.refresh}
                         refreshing={this.state.refresh}
                         data={this.state.comObj}
-                        // onPressItem = {this._itemSelect}
                         renderItem={
                             this._renderItem
                         }
@@ -170,12 +163,20 @@ export default class Login extends Component<{}> {
     _renderItem = ({item}) =>
         <View>
             <Text
+                style = {styles.comTextStyle}
                 //不用bind无法正常调用
                 onPress ={this._itemSelect.bind(this,item)}>{item.shortName}</Text>
+            {this.lastItem(item)}
         </View>;
+    lastItem = (item) => {
+        if (item.key == this.state.comObj.length-1) {
+            return <View style={{height: 50}}></View>
+        } else {
+            return <View style={{height: 0}}></View>
+        }
+    };
 
     _itemSelect(item){
-        ToastAndroid.show(item.shortName,ToastAndroid.SHORT);
         this.popupDialog.dismiss();
         this.setState ({
             compCode:item.compCode,
@@ -223,10 +224,6 @@ export default class Login extends Component<{}> {
 
 
         NetUtils.postJson(UrlUtils.domain + UrlUtils.loginUrl, jsonData,
-            //普通函数不生效
-            // function (responseText) {
-            // alert(JSON.stringify(responseText));}
-
             responseText => {
                 if(responseText.success){
                     UserInfo.compCode = responseText.data.compCode;
@@ -236,7 +233,7 @@ export default class Login extends Component<{}> {
 
                     this.props.navigation.navigate('Main');
                 } else {
-                    alert("登录失败")
+                    ToastAndroid.show("登录失败",ToastAndroid.SHORT);
                 }
 
             });
@@ -273,11 +270,11 @@ const styles = StyleSheet.create({
 
 
     inputStyle: {
+        marginLeft:10,
+        textAlignVertical : 'center',
         textAlign: 'left',
         color: '#333333',
-        height:40,
-        // underlineColorAndroid:'rgba(0,0,0,0)'
-
+        height:40
     },
 
     buttonStyle: {
@@ -287,5 +284,14 @@ const styles = StyleSheet.create({
         marginRight: 15,
         height: 50,
     },
+    comTextStyle: {
+        marginLeft:15,
+        marginTop:5,
+        marginBottom:5
+    },
+    itemDivder :{
+        backgroundColor :'black',
+        height:1
+    }
 
 });
