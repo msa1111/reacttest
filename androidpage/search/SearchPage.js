@@ -79,7 +79,7 @@ export default class SearchPage extends Component {
                         });
 
                     } else {
-                        let index = this.state.flatListData.length+1;
+                        let index = this.state.flatListData.length;
                         let arr = [];
                         this.state.flatListData.forEach((e) => {
                             arr.push(e);
@@ -131,7 +131,7 @@ export default class SearchPage extends Component {
         </View>
 
     lastItem = (item) => {
-        if (item.key == this.state.flatListData.length) {
+        if (item.key == this.state.flatListData.length-1) {
             return <View style={{height: 50}}></View>
         } else {
             return <View style={{height: 0}}></View>
@@ -177,5 +177,3 @@ const styles = StyleSheet.create({
         right: 10
     }
 });
-
-// AppRegistry.registerComponent('MyProject', () => SearchPage);
