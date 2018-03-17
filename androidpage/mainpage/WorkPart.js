@@ -12,6 +12,7 @@ import SearchPage from "../search/SearchPage";
 import {StackNavigator,NavigationActions} from "react-navigation";
 import {PropTypes,} from 'prop-types'
 import {ViewPropTypes,} from 'ViewPropTypes'
+import ScreenUtils from "../../utils/ScreenUtils";
 
 
 const BANNER_IMGS = [
@@ -167,33 +168,6 @@ export default class WorkPart extends Component<{}> {
                     width: 55,
                     height: 45,
                 }
-            },
-            {
-                key: 11,
-                itemName: '',
-                imgSource: null,
-                style: {
-                    marginTop: 5,
-                    marginBottom: 5,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 55,
-                    height: 45,
-                }
-            },
-
-            {
-                key: 12,
-                itemName: '',
-                imgSource: null,
-                style: {
-                    marginTop: 5,
-                    marginBottom: 5,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 55,
-                    height: 45,
-                }
             }
         ];
     }
@@ -245,10 +219,9 @@ export default class WorkPart extends Component<{}> {
 
 
 const styles = StyleSheet.create({
-
     flatItem: {
         marginTop: 20,
-        flex: 1,
+        width:ScreenUtils.screenWidth/4,
         alignItems: 'center'
     },
 
