@@ -13,6 +13,8 @@ import {StackNavigator,NavigationActions} from "react-navigation";
 import {PropTypes,} from 'prop-types'
 import {ViewPropTypes,} from 'ViewPropTypes'
 import ScreenUtils from "../../utils/ScreenUtils";
+import { NativeModules } from 'react-native';
+// import AndroidToast from "./AndroidToast"
 
 
 const BANNER_IMGS = [
@@ -197,6 +199,7 @@ export default class WorkPart extends Component<{}> {
     _renderItem = ({item}) =>
         <TouchableOpacity style={styles.flatItem}
                           onPress={() =>{
+                             NativeModules.AndroidToast.show('测试模块',NativeModules.AndroidToast.SHORT)
                               console.log(this.props.navigation);
                               this.props.navigation.navigate(item.destPage);
 
